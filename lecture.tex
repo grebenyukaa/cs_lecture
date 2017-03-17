@@ -1,0 +1,52 @@
+\input{report-header.tex}
+\begin{document}
+
+\textbf{\large{Abstract}}.
+\noindent \textbf{Binary search, Probabilistic binary search, Noisy binary search}
+
+The concept of probabilistic binary search on undirected fully connected graphs and its applications to various problems are described. State of the art algorithms for both probabilistic and deterministic cases are presented, including neccessary definitions, theorems and proofs. The material is given in a form of a lecture.  
+
+\setcounter{page}{2}
+\tableofcontents
+
+\section{Introduction}
+Binary search is an important and widely used algorithm in many spheres of computer science. For example, whenever there is a sorted sequence of elements $\{x_n\}, x_i \le x_j \forall i,j \in \mathbb{N}: i < j$ of some ordered set $S$, the task of finding a target element $x_t \in \{x_n\}$ can be performed in at most $log_2(n)$ comparisons, where $n = |\{x_n\}|$. The key idea behind this algorithm is to eliminate at least a half of remaining unchecked elements on each iteration, thus yielding a logarithmic time complexity. Its probabilistic counterpart is essentially the same, but generalizes the deterministic algorithm over the assumption, that the comparing result can be noisy with some known cumulative distribution function of noise or adversarily altered, and so can be trusted only up to probability $\delta$.
+
+
+The process of binary searching for an element can be naturally described with the help of graphs. While a binary search tree representation is straightforward for the simplest case of searching for an element in a sorted sequence, the right representation of the graph and the searching process in other cases might be tricky. The goal of this paper is to address such cases with an elegant definition of binary search on graphs as done by Emamjomeh-Zadeh et al. in~\cite{main}
+
+
+\section{Preliminaries and definitions}
+\subsection*{Problem definition}
+Imagine that vertices in a connected unordered graph are marked with elements of some set (the set need not be ordered for this purpose). The task, we are going to solve, can be described as finding a vertex in the given graph with the same mark, as the given target element of the set, or acknowledging the absence of such vertex in the graph otherwise. Let us also assume that the cost of computing the equality of the elements, or querying the elements, of the set is sufficiently larger than traversing all the vertices present in the graph or equal to it. In that case the computationally efficient solution of this prolem will be yilded by devising an optimal querying strategy on vertices of the graph.
+
+
+Now we can give a formal definition of the problem, we are going to solve with the probablistic binary search algorithm.
+Given
+\begin{itemize}
+  \item a set $\Xi$ and a connnected unordered graph $G(V, E, \xi), |V| = n, |E| = m$, with $\xi: V \rightarrow \Xi$,
+  \item a target value $\xi_t \in \Xi$
+  \item and a comparison function $c_\xi: \Xi \times \Xi \rightarrow \{0, 1\}$ s.t. $c_\xi$ is $\Omega(n)\footnotemark[1]$
+\end{itemize}
+we need to find out if there exists such $v_t \in V$, that $c_\xi(\xi(v_t), \xi_t) = 1$.
+%--
+\footnotetext[1]{Big-omega notation is used here. $f$ is $\Omega(g)$ means that $f$ is growing faster or equal to $g$}
+%--
+
+\subsection*{Probabilistic binary search}
+To achieve the goal of finding an optimal querying strategy we will need to iteratively reweight some edges of the graph, which yields the updated formal definition of the graph:
+
+
+$G(V, E, f_\omega), f_\omega: E \rightarrow \mathbb{R}$ with $|V| = n, |E| = m$ and $f_\omega(e) > 0 \forall e in E$. To simplify the notation, we will substitute $f_\omega(e)$ with $\omega_e$. Also, sometimes we will denote the weight of an edge $e = (u, v)$ as $\omega(u, v)$. 
+
+
+The distance between two reachable vertices $u, v$ is denoted as follows: $d(u, v) = \sum \limits_{w_i, w_j \in \{w\}, i \ne j} \omega(w_i, w_j)$, $\{w\} = \{u, w_1, w_2, ..., v\}$ is the shortest path between $u$ and $v$.
+
+
+To give a proper description of the algorithm, we will need to define the set of all vertices, reachable from a vertex $u$ ``through'' an edge $e = (u, v)$: $N(u, e) = \{ w \in V | d(u, w) = \omega(u, v) + d(v, w) \}$.
+
+
+\section{References}
+\nocite{main, karp, benor, annals}
+\printbibliography[heading=none]
+\end{document}

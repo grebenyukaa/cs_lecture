@@ -1,0 +1,123 @@
+\documentclass[a4paper,12pt]{report}
+\raggedbottom
+% polyglossia should go first!
+\usepackage{polyglossia} % multi-language support
+
+\setdefaultlanguage{russian}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+\setmonofont{CMU Typewriter Text}
+
+\setmainlanguage{russian}
+\setotherlanguage{english}
+
+\DeclareSymbolFont{letters}{\encodingdefault}{\rmdefault}{m}{it}
+\usepackage{amsmath} % math symbols, new environments and stuff
+\usepackage{amssymb}
+%\usepackage{bm}
+
+\usepackage{unicode-math} % for changing math font and unicode symbols
+\setmathfont{XITS Math}
+
+\parindent=1.5cm
+\usepackage{indentfirst}
+\usepackage[left=2cm,right=1cm,top=2cm,bottom=2cm,bindingoffset=1cm]{geometry}% 
+%for margins in title page
+\renewcommand{\baselinestretch}{1.5}
+
+\usepackage[style=english]{csquotes} % fancy quoting
+\usepackage{microtype} % for better font rendering
+\usepackage[backend=biber, sorting=none, style=gost-numeric]{biblatex} % for 
+%bibliography
+\addbibresource{reference_list.bib}
+
+\usepackage{hyperref} % for refs and URLs
+\usepackage{graphicx} % for images (and title page)
+\usepackage{tabu} % for tabulars (and title page)
+\usepackage{placeins} % for float barriers
+\usepackage{titlesec} % for section break hooks
+
+\usepackage[labelsep=endash]{caption}
+\captionsetup[table]{
+    singlelinecheck=false, %table caption per GOST, not centered
+    justification=justified}
+\captionsetup[figure]{
+    name=Рисунок           %picture caption per GOST
+}
+
+\usepackage{subcaption} % for subfloats
+
+\usepackage{listings} % for listings
+\newfontfamily\listingsfont{Source Code Pro}
+
+\usepackage{enumitem} % for unboxed description labels (long ones)
+\usepackage{tikz}     % tikz pictures
+\usepackage{rotating} % landscape pictures
+
+\defaultfontfeatures{Mapping=tex-text} % for converting "--" and "---"
+
+\MakeOuterQuote{"} % enable auto-quotation
+
+% new page and barrier after section, also phantom section after clearpage for
+% hyperref to get right page.
+% clearpage also outputs all active floats:
+\newcommand{\sectionbreak}{\clearpage\phantomsection}
+\newcommand{\subsectionbreak}{\FloatBarrier}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\renewcommand{\thesection}{\arabic{section}} % no chapters
+\numberwithin{equation}{section}
+
+\setcounter{tocdepth}{3}
+
+\usepackage{lastpage}
+\usepackage[figure,table,xspace]{totalcount}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\makeatletter
+\define@key{blx@lbx}{fromjapanese}{\blx@defstring{fromjapanese}{#1}}
+\define@key{blx@lbx}{langjapanese}{\blx@defstring{langjapanese}{#1}}
+\makeatother
+
+%algorithmic
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{framed}
+
+\makeatletter
+% because fuck algorithm env, that's why
+\makeatother
+
+\def\LCB{\{} %there are some issues with curly brackets inside algorithm(icx) environment
+\def\RCB{\}}
+\renewcommand{\algorithmicrequire}{\textbf{Необходимо}:} 
+\renewcommand{\algorithmicensure}{\textbf{Установить}:}
+\renewcommand{\algorithmicend}{\textbf{Конец}}
+\renewcommand{\algorithmicif}{\textbf{Если}}
+\renewcommand{\algorithmicthen}{\textbf{то}}
+\renewcommand{\algorithmicelse}{\textbf{Иначе}}
+\renewcommand{\algorithmicfor}{\textbf{Для}}
+\renewcommand{\algorithmicforall}{\textbf{Для каждого}}
+\renewcommand{\algorithmicdo}{\textbf{выполнять}:}
+\renewcommand{\algorithmicwhile}{\textbf{Пока}}
+\renewcommand{\algorithmicloop}{\textbf{Цикл}}
+\renewcommand{\algorithmicrepeat}{\textbf{Повторять}:}
+\renewcommand{\algorithmicuntil}{\textbf{Пока не}:}
+\renewcommand{\algorithmicreturn}{\textbf{Возвратить}}
+
+\newcommand{\algorithmicendif}{\textbf{Конец условия}}
+\newcommand{\algorithmicendfor}{\textbf{Конец цикла}}
+\newcommand{\algorithmicendwhile}{\textbf{Конец цикла}}
+\newcommand{\algorithmicendloop}{\textbf{Конец цикла}}
+
+% from algpseudocode.sty
+\algdef{SE}[WHILE]{While}{EndWhile}[1]{\algorithmicwhile\ #1\ \algorithmicdo}{\algorithmicendwhile}%
+\algdef{SE}[FOR]{For}{EndFor}[1]{\algorithmicfor\ #1\ \algorithmicdo}{\algorithmicendfor}%
+\algdef{SE}[LOOP]{Loop}{EndLoop}{\algorithmicloop}{\algorithmicendloop}%
+\algdef{SE}[IF]{If}{EndIf}[1]{\algorithmicif\ #1\ \algorithmicthen}{\algorithmicendif}%
+
+%
+\usepackage{listings}
