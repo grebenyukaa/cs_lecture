@@ -3,13 +3,13 @@
 % polyglossia should go first!
 \usepackage{polyglossia} % multi-language support
 
-\setdefaultlanguage{russian}
+\setdefaultlanguage{english}
 \setmainfont{CMU Serif}
 \setsansfont{CMU Sans Serif}
 \setmonofont{CMU Typewriter Text}
 
-\setmainlanguage{russian}
-\setotherlanguage{english}
+%\setmainlanguage{russian}
+\setmainlanguage{english}
 
 \DeclareSymbolFont{letters}{\encodingdefault}{\rmdefault}{m}{it}
 \usepackage{amsmath} % math symbols, new environments and stuff
@@ -27,7 +27,10 @@
 
 \usepackage[style=english]{csquotes} % fancy quoting
 \usepackage{microtype} % for better font rendering
-\usepackage[backend=biber, sorting=none, style=gost-numeric]{biblatex} % for 
+\usepackage[backend=biber,
+	sorting=none,
+	%style=gost-numeric
+]{biblatex} % for 
 %bibliography
 \addbibresource{reference_list.bib}
 
@@ -37,13 +40,13 @@
 \usepackage{placeins} % for float barriers
 \usepackage{titlesec} % for section break hooks
 
-\usepackage[labelsep=endash]{caption}
-\captionsetup[table]{
-    singlelinecheck=false, %table caption per GOST, not centered
-    justification=justified}
-\captionsetup[figure]{
-    name=Рисунок           %picture caption per GOST
-}
+%\usepackage[labelsep=endash]{caption}
+%\captionsetup[table]{
+%    singlelinecheck=false, %table caption per GOST, not centered
+%    justification=justified}
+%\captionsetup[figure]{
+%    name=Рисунок           %picture caption per GOST
+%}
 
 \usepackage{subcaption} % for subfloats
 

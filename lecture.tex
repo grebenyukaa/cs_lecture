@@ -1,49 +1,202 @@
-\input{report-header.tex}
+\input{preamble-eng.tex}
 \begin{document}
-
-\textbf{\large{Abstract}}.
-\noindent \textbf{Binary search, Probabilistic binary search, Noisy binary search}
-
-The concept of probabilistic binary search on undirected fully connected graphs and its applications to various problems are described. State of the art algorithms for both probabilistic and deterministic cases are presented, including neccessary definitions, theorems and proofs. The material is given in a form of a lecture.  
-
-\setcounter{page}{2}
-\tableofcontents
+\maketitle
 
 \section{Introduction}
-Binary search is an important and widely used algorithm in many spheres of computer science. For example, whenever there is a sorted sequence of elements $\{x_n\}, x_i \le x_j \forall i,j \in \mathbb{N}: i < j$ of some ordered set $S$, the task of finding a target element $x_t \in \{x_n\}$ can be performed in at most $log_2(n)$ comparisons, where $n = |\{x_n\}|$. The key idea behind this algorithm is to eliminate at least a half of remaining unchecked elements on each iteration, thus yielding a logarithmic time complexity. Its probabilistic counterpart is essentially the same, but generalizes the deterministic algorithm over the assumption, that the comparing result can be noisy with some known cumulative distribution function of noise or adversarily altered, and so can be trusted only up to probability $\delta$.
+Binary search is an important and widely used algorithm in many spheres of computer science. For example, whenever there is a sorted sequence of elements $\{x_n\}, x_i \le x_j, i < j~\forall i,j \in \mathds{N}$ of some ordered set $S$, the task of finding a target element $x_t \in \{x_n\}$ can be performed in at most $log_2(n)$ comparisons, where $n = |\{x_n\}|$. The key idea behind this algorithm is to eliminate at least a half of remaining unchecked elements on each iteration, thus yielding a logarithmic time complexity.
 
 
-The process of binary searching for an element can be naturally described with the help of graphs. While a binary search tree representation is straightforward for the simplest case of searching for an element in a sorted sequence, the right representation of the graph and the searching process in other cases might be tricky. The goal of this paper is to address such cases with an elegant definition of binary search on graphs as done by Emamjomeh-Zadeh et al. in~\cite{main}
+Its probabilistic counterpart is essentially the same, but generalizes the deterministic algorithm over the assumption, that the comparing result can be noisy with some known CDF\footnotemark[1] of noise or adversarily altered, and so can be trusted only up to probability $\delta$.
 
+
+The process of binary searching for an element can be naturally described with the help of graphs. While a binary search tree representation is straightforward for the simplest case of searching for an element in a sorted sequence, the right representation of the graph and the searching process in other cases might be tricky. A number of papers~\cite{main, karp, benor} address such cases with elegant definitions of binary search and this particular lecture is about Emamjomeh-Zadeh's et al. approach to probabilistic binary search on graphs~\cite{main}.
+%--
+\footnotetext[1]{CDF stands for ``cumulative distribution function''}
+%--
+
+\clearpage
 
 \section{Preliminaries and definitions}
 \subsection*{Problem definition}
-Imagine that vertices in a connected unordered graph are marked with elements of some set (the set need not be ordered for this purpose). The task, we are going to solve, can be described as finding a vertex in the given graph with the same mark, as the given target element of the set, or acknowledging the absence of such vertex in the graph otherwise. Let us also assume that the cost of computing the equality of the elements, or querying the elements, of the set is sufficiently larger than traversing all the vertices present in the graph or equal to it. In that case the computationally efficient solution of this prolem will be yilded by devising an optimal querying strategy on vertices of the graph.
+For the purpose of this lecture we will take into consideration only undirected graphs as the described approach can be extended to directed graphs in essentially the same way, as shown in the original paper by Emamjomeh-Zadeh et al.
 
 
+\subsubsection*{Informal definition}
+Imagine that vertices in a weighted connected undirected graph are marked with elements of some set (the set need not be ordered for this purpose). The task, we are going to solve, can be described as finding a vertex in the given graph with the same mark, as the given target element of the set, or acknowledging the absence of such vertex in the graph otherwise.
+
+
+In addition we assume that the cost of computing the equality of the elements(or ``querying'' the elements) of the set is a sufficiently computationally harder task than traversing the vertices of the graph. In that case the computationally efficient solution of this prolem will be yilded by devising an adaptive querying strategy on vertices of the graph.
+
+
+\subsubsection*{Formal definition}
 Now we can give a formal definition of the problem, we are going to solve with the probablistic binary search algorithm.
+\begin{definition}[Problem definition]
 Given
 \begin{itemize}
-  \item a set $\Xi$ and a connnected unordered graph $G(V, E, \xi), |V| = n, |E| = m$, with $\xi: V \rightarrow \Xi$,
-  \item a target value $\xi_t \in \Xi$
-  \item and a comparison function $c_\xi: \Xi \times \Xi \rightarrow \{0, 1\}$ s.t. $c_\xi$ is $\Omega(n)\footnotemark[1]$
+  \item a positively weighted connnected undirected graph $G(V, E, W, \omega), |V|~=~n, |E|~=~m$, with $\omega: W \times W \rightarrow \mathds{R}$ as the edge weighting function,
+  \item a set $M$, a target value $m_t \in M$ and a function $\mu: V \rightarrow M$ as the vertex marking function
+  \item and a comparison function $c_\mu: M \times M \rightarrow \{0, 1\}$ s.t. $c_\mu$ is $\Omega(n^2)\footnotemark[1]$
 \end{itemize}
-we need to find out if there exists such $v_t \in V$, that $c_\xi(\xi(v_t), \xi_t) = 1$.
+we need to find out if there exists such $v_t \in V$, that $c_\mu(\mu(v_t), m_t) = 1$.
+\label{problem_def}
+\end{definition}
 %--
 \footnotetext[1]{Big-omega notation is used here. $f$ is $\Omega(g)$ means that $f$ is growing faster or equal to $g$}
 %--
 
 \subsection*{Probabilistic binary search}
-To achieve the goal of finding an optimal querying strategy we will need to iteratively reweight some edges of the graph, which yields the updated formal definition of the graph:
+To solve the problem by devising an adaptive vertex querying strategy Emamjomeh-Zadeh et al. define the quering process in the following way:
+\begin{definition}
+A query to a vertex $v \in V$ against the target vertex $v_t$ can be answered in either way: 
+\begin{itemize}
+	\item $v$ is the target vertex,
+	\item $v$ is not the target vertex, but there $\exists u \in V: v \ne u$ that lies on the shortest path to the target.
+\end{itemize}
 
 
-$G(V, E, f_\omega), f_\omega: E \rightarrow \mathbb{R}$ with $|V| = n, |E| = m$ and $f_\omega(e) > 0 \forall e in E$. To simplify the notation, we will substitute $f_\omega(e)$ with $\omega_e$. Also, sometimes we will denote the weight of an edge $e = (u, v)$ as $\omega(u, v)$. 
+An answer to the query is correct up to probability $\delta$.
+\label{pbs_def}
+\end{definition}
 
 
-The distance between two reachable vertices $u, v$ is denoted as follows: $d(u, v) = \sum \limits_{w_i, w_j \in \{w\}, i \ne j} \omega(w_i, w_j)$, $\{w\} = \{u, w_1, w_2, ..., v\}$ is the shortest path between $u$ and $v$.
+To make the querying stategy efficient for the binary search algorithm, we will need to discard at least half of the set of remaining not queried vertices on each iteration of the algorithm. For that we will need the following definitions:
+\begin{definition}
+Let us denote the distance $d: V \times V \rightarrow \mathds{R}$ between two vertices $u, v \in V$ in the following way:
+	\[ d(u, v) = \sum \limits_{w_i, w_j \in \{w\},~i \ne j} \omega(w_i, w_j), \{w\} = \{u, w_1, w_2, ..., v\}. \]
+\end{definition}
+As the graph is conected and positively weighted the distance is always $0 < d(u, v) < \infty,~\forall u, v \in V$.
 
 
-To give a proper description of the algorithm, we will need to define the set of all vertices, reachable from a vertex $u$ ``through'' an edge $e = (u, v)$: $N(u, e) = \{ w \in V | d(u, w) = \omega(u, v) + d(v, w) \}$.
+\begin{definition}[The set of candidate vertices]
+Let us denote $N(v, e): V \times E$ as the set of all vertices $w$ of the graph $G$ for which the edge $e$ lies on the shortest path between $v$ and $w$ as
+	\[N(u, e) = \{ w \in V | d(u, w) = \omega(u, v) + d(v, w) \}\]
+\end{definition}
+
+
+\subsubsection*{The deterministic case}
+First of all we can formulate the binary search algorithm for the deterministic case, i.e. with $\delta = 1$, and show that in this case the algorithm performs only $O(log(n))\footnotemark[1]$, which was only known for trees before~\cite{main}.
+%--
+\footnotetext[1]{For the rest of the lecture we denote $log_2$ as ``log'' for convenience}
+%--
+
+
+As given by the definition~\ref{pbs_def}, if the current queried vertex $q$ is not the target, we are left with the general direction of possible position of the target in the form of edge $e$ adjacent on $q$. This lets us assume, that a computationally efficient querying stategy should always follow the minimal aggregated path to the remaining set of candidate vertices, generated by $q$ and $e$ -- $N(q, e)$. Then to prove the efficiency of the algorithm it is enough to show that on each iteration the algorithm minimizes the aggregated path function.
+
+
+\begin{definition}[Aggregated path]
+Let us denote the aggregated path from the source vertex $q$ to a subset of vertices $S \subseteq V$ of a graph $G$ as
+	\[\Phi_S(q) = \sum \limits_{v \in S} d(q, v).\]
+\end{definition}
+
+
+\begin{theorem}
+There exists a deterministic binary search algoritm, capable of solving the defined problem~\ref{problem_def} in $O(log(n))$ queries on vertices.
+\end{theorem}
+\begin{proof}
+	At each iteration we are minimizing the aggregate path function $\Phi_S(q)$, where $q$ is the currently queried vertex and $S$ is a subset of $V$.
+	Let us assume, that $q$ is not the target vertex, then we have an edge $e = (q, v)$.
+
+
+	Let us define $S = S^+ \cup S^-$, where
+		\[S^+ = S \cap N(q, e) \text{and} S^- = S \\ S^+.\]
+
+
+	To prove the theorem we need to show that $|S^+| < \frac{1}{2}|S|$. Denoting $\omega_e = \omega(q, v)$, the following holds for these sets:
+	\begin{align*}
+	d(q, w^+) &= d(v, w^+) + \omega_e,~\forall w^+ \in S^+
+	\\
+	d(q, w^-) &\le d(v, w^-) - \omega_e,~\forall w^- \in S^-
+	\end{align*}
+
+
+	The first equation is obvious, as we know that $e$ lies on all shortest paths from $q$ to elements of $S^+$.
+
+
+	Let us take a look at the second equation. By definition of $S^+, v \notin S^-$. Thus any path, starting at vertex $v$ and ending in a $w^- \in S^-$ is either equal to $d(q, w^-) + \omega_e$ if it contains the vertex $q$ or greater than that, as it does not contain $q$ and does not follow the shortest path.
+
+
+	Now let us return to the function being minimized. By definition of the search process, $v$ is the the next queriable vertex at the next iteration of the algorithm. Let us compare the current minimal value $\Phi_S(q)$ and the value of $\Phi_S(v)$.
+
+
+	\begin{align*}
+	\Phi_S(v) &= \sum \limits_{w \in S} d(v, w) = \sum \limits_{w^+ \in S^+} d(v, w^+) + \sum \limits_{w- \in S^-} d(v, w^-);
+	\\
+	\Phi_S(q) &= \sum \limits_{w \in S} d(q, w) = \sum \limits_{w^+ \in S^+} d(q, w^+) + \sum \limits_{w- \in S^-} d(q, w^-) \\
+	          &                                 = \sum \limits_{w^+ \in S^+} d(v, w^+) + |S^+| \cdot \omega_e + \sum \limits_{w^- \in S^-} d(q, w^-)
+	\end{align*}
+
+
+	Then,
+	\begin{align*}
+	\Phi_S(q) - \Phi_S(v) &= \sum \limits_{w^- \in S^-} d(v, w^-) - \left[|S^+| \cdot \omega_e + \sum \limits_{w- \in S^-} d(q, w^-)\right] \\
+	                      &= \sum \limits_{w^- \in S^-} \left(d(v, w^-) - d(q, w^-)\right) - |S^+| \cdot \omega_e \\
+	                      &\ge |S^-| \cdot \omega_e - |S^+| \cdot \omega_e = \left(|S^-| - |S^+|\right) \cdot \omega_e
+	\end{align*}
+
+
+	Thus,
+	\begin{equation*}
+		\Phi_S(q) \ge \Phi_S(v) + \omega_e \cdot \left(|S^+| - |S^-|\right),
+	\end{equation*}
+	
+
+	which leads to
+	\begin{equation*}
+		\Phi_S(v) \le \Phi_S(q) - \omega_e \cdot \left(|S^+| - |S^-|\right)
+	\end{equation*}
+
+
+	From minimality of $\Phi_S(q)$ at the current iteration follows $|S^+| \le |S^-|$ and thus $|S^+| < \frac{1}{2}|S|$, as $|S^+| + |S^-| = |S|$.
+
+
+	The theorem is proven.
+\end{proof}
+
+
+\subsubsection*{A formal definition of the algorithm}
+This particular result imlplies an efficient algorithm of deterministic binary search on graphs with with logarithmic complexity in terms of queries on vertices, which is considered a breakthrough by Emamjomeh-Zadeh et al.~\cite{main}. With a slight modification from the original algorithm in~\cite{main}, let us give its formal definition.
+
+\begin{figure}[H]
+    \begin{framed}
+        \begin{algorithmic}[1]
+            \State \textbf{Input}:
+            \begin{itemize}
+            	\item $M$ -- the set of unknown vertex marks;
+            	\item $\mu$ -- the vertex marking function;
+            	\item $c_\mu$ -- the marks comparator;
+            	\item $G(V, E, W, \omega)$ -- the graph;
+            	\item $m_t \in M$ -- the target mark;
+            \end{itemize}
+            
+            \State \textbf{Output}:
+			\begin{itemize}
+            	\item $\{v_t\}, v_t \in V$, s.t. $c_\mu(\mu(v_t), m_t) = 1$ if $m_t$ is found,
+            	\item $\varnothing$ otherwise;
+			\end{itemize}
+
+			\State $S \coloneqq V$
+            \While {$S \ne \varnothing$}
+                \State Take $q$, s.t. $\Phi_S(q) = min_{w \in S} \Phi_S(w)$
+                \If {$c_\mu(\mu(q), m_t) = 1$}
+                    \State \Return \{q\};
+                    \State $e = (q, v)$
+                    \State $S \coloneqq S \cap N(q,e)$
+                \EndIf
+            \EndWhile
+            \State \Return $\varnothing$;
+        \end{algorithmic}
+    \end{framed}
+    \caption{Deterministic binary search on graphs}
+    \label{algDet}
+\end{figure}
+
+
+One may notice, that the task of finding $q$, which minimizes $\Phi_S(q)$, and computing $N(q, e)$ might be computationally hard subtasks. But both these tasks can be solved efficiently with help of Dijkstra algorithm~\cite{dijkstra}. This imposes a restriction on the applicability of this algorithm to real tasks, though it is fairly safe to say that in cases where $c_\mu$ is $\Omega(n^2)$ one may benefit from applying this algorithm to their problem.
+
+
+
+\subsubsection*{The probabilistic case}
+The definition (\ref{pbs_def}) of deterministic binary search can be easily improved to support the probabilistic case. As shown by Emamjomeh-Zadeh's et al. in~\cite{main} it is sufficient to repeat each query $K$ times and take the median to determine final result.  
 
 
 \section{References}
