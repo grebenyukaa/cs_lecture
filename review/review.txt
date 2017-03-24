@@ -1,0 +1,124 @@
+p.1
+Introduction And Deﬁnitions -> and
+42 * 2 -> use \cdot
+
+explain what the "|" means mathematically
+add a reference for Peano numbers
+
+p.2
+and we use capitalized names for constructors and for types. -> We use ...
+whereas recursion works analytically, starting on data further from a base case -> starting on data from a special case
+for an SMT solver -> for a SMT solver
+
+that is, logic -> a logic
+U+ true,false -> {true, false}, consider using \Beta for booleans
+A type δ depends on another type ϵ is ϵ is the type -> type ϵ if ϵ
+"dependency graph" definition?
+explain [] for selectors in codata definition
+
+p.3
+auxilitary -- auxiliary
+Distinctness: no two constructors are equal ->add "of the same type"
+
+Exhaustiveness - what? bool must belong to types?
+
+We then deﬁne theory of datatypes and codatatypes DC for -- needs some punctuation for "DC"
+if there exists an interpretation in that satisﬁes it -- exists in that | in is unneccessary
+lasso-shaped sequence -- WTF
+with an unique value -- a
+
+a singleton (cardinality equals 1). -- AND its cardinality equals 1
+In the latter case, δ necessarily as a single constructor -> (as->has)
+
+Otherwise because singleton types have only one possible value the noncorecursive arguments do not affect cardinality of δ (because cross product of any domain to a singleton set is the same domain). Therefore by coinduction principle the type has only one value. | needs a clearer explaination
+
+p.4
+C(1,C(0,C(0,...))), C(0,C(1,C(0,...))) etc -- etc.
+The procedure builts closure of E - builds ... a closure
+phase; rules -- why semicolon?
+where conclusion either speciﬁes equalities  -- the conclusion
+or is ⊥ (contradiction). -- a contradiction
+results of rule application to the set -- the rule application
+one by one in spirit of depth-ﬁrst search -- in a spirit
+its nodes are ﬁnite sets of equalities and children of a node -- the children
+with leaf nodes ⊥ allowed -- contradiction allowed??
+A note is saturated if no nonredundant rule application can be performed. -- node? ... applicatons
+a calculus of equality sets with applications as operations. -- of sets
+Reﬂ, Sym and Trans, Reﬂ are encoded  -- smth is unnecessary
+whereas Inject computes uniﬁcation (downward) -- the unification closure
+
+p.5
+We write A(x) to get a representative for equivalence class of x. -- an/the equivalence class
+Clash represents failure to unify equated terms -- a(the) failure
+C(t1,...,tn) ≈ D(u1,...,un) ∈ E C ̸= D -- D(u1,...,un) D is incorrectly displayed (in italics)
+mapping A that associates with each equivalence class a µ-term -- mapping ... to a \mu term
+C \in FFctr -- too many Fs
+All datatypes therefore can be represented as non-cyclic µ-terms, and all codatatypes – as cyclic -- ones
+α-disequivalent—e.g. -- use ~--~ maybe
+
+p.6
+Because of µ-terms there is no inﬁnitely expanding terms so number -- the number | because of mu terms what? | no infinitely expanded rules where?
+They capture properties of (co)datatypes described above -- the properties
+Informally ﬁrst rule of this phase -- the first
+implements search for -- searching
+branching will still occur because of added equivalence -- the/a added complexity
+is needed to deal with described -- the described
+with root node -- the root node
+If Split is applied on some tτ, by the previous step -- at the prev step
+
+p.7
+Now we construct family of sets corresponding -- a family
+because all chains of selectors in input -- its/the input
+Depth of a tree branch -- The depth
+(Refutation Soundness) -- Refutation soundness
+First we deﬁne expansion -- the expansion
+First we deﬁne expansion of u with respect to t (where u is a subterm in t = µx. e) as, informally, a subterm u′ with free variable x is substituted by body of t -- a free variable ... substituted by ... the body of t
+By deﬁnition of µ-terms after -- By deﬁnition of µ-terms, after
+
+p.8
+Now that we deﬁned -- having defined | now that we have defined
+JY (τ) denotes domain of type τ. -- a/the domain
+The ﬁnal part in fully specifying -- in->of
+Points 2 and 3 can be proven by induction. First one needs to prove that -- to prove/for proving the first one, we need to prove ...
+
+p.10
+t1 ≡ t2 ∈ F -- \approx
+induction hypothesis then it’s -- it is
+We can’t apply Split -- cannot
+for unknown yet -- for yet unknown
+
+------------------
+p | text
+1 | Give a better definition of "type"
+1 | Definitions for | and SCons
+1 | Corecursive codatatypes -- codatatypes are already corecursive
+2 | should have expalined haskell-notation for _'s in a mathematical way, e.g. fst Pair(i, a) a \forall i \in type A
+2 | Recall that a logic is deﬁned through a signature that lists all non-logic symbols -- not clear from where to recall (add a link to source maybe)
+2 | Predicates can be viewed as n-functions from domain space to truth values -- truth->booleans
+3 | [s :]t -- notation is unclear, maybe this should be written as a tuple (s, t)
+3 | associated dependency graph is strongly connected -- define the dependency graph, explain what nodes and edges are
+3 | di1(x)∨···∨dimi(x): -- is it true or false?
+3 | highligh the "coniduction rule" somehow as it is important for the proofs of theorems
+3 | A formula is called DC-satisﬁable if there exists an interpretation in that satisﬁes it. -- a formal definition for an interpretation of the formula is needed (?)
+4 | corecursive codatatype
+4 | (because cross product of any domain to a singleton set is the same domain).  -- it's not the same domain technically, but the part about cardinality is true
+5 | define the << operation properly
+5 | injection closure: E+? and why i1s syntactic equality used?
+5 | define properly the "free variable" termin
+6 | δ ∈ Ydt A([tδ]) = µx. u x ∈ FV(u) ⊥ -- explain that we look at u as a part of the same \mu notation term in x ∈ FV(u)
+6 | δ ∈ Ydt ∧ δ is ﬁnite -- |\delta|, not just \delta
+6 | general note: please explain why those complex rules are contructed the way they are (Acyclic, Unique, Split, Single)
+6 | Hence, A(tτ) describes a class of τ values that members of this equivalence class can take in models of E. -- what does "model" of E mean?
+6 | A := -- inconsistent notation, assignment part is not necessary in A definition
+6 | Rules for this phase are listed on ﬁgure 3.2. -- there is no fig. 3.2, there are figures 3 and 2
+6 | Informally ﬁrst rule of this phase (listed on ﬁgure 3.3) -- same for fig. 3.3
+6 | closed derivation tree -- a formal definition needed, for trees and closed trees subsequently
+7 | derivation tree -- a formal definition needed
+7 | \exists n m . -- better to write as \exists n, m : or \exists n, m s.t. ...
+7 | lim -- a formal definition needed
+7 | it is a ﬁnite set because all chains of selectors in input are ﬁnite -- needs clarification
+7 | theorem 1 -- without formal definitions for derivation trees, limits of set unions and a througly expalinred proof, nothing can be made out of the proof
+    if smth can be inferred inductively, then please show the indution process
+7 | If Split is applied on some tτ, by the previous step, then E∪{t ≈ Cj(s1 j(t),...,snj j (t))}is DC-unsatisﬁable for all Cj ∈ Fτctr, and all possible models require this equality – hence E is DC-unsatisﬁable. -- needs clarification
+8 | For example, t = µx. C(µy. C(y)) is not normal because ⟨y⟩µy. C(y) = µy. C(y), and so is ⟨µy. C(y)⟩µx. C(µy. C(y)) – they are α-equivalent. -- nice example, but please show the actual calculations
+

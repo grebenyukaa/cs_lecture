@@ -1,0 +1,67 @@
+\begin{longtabu} to \textwidth {|r|p{40mm}|X|X|c|}
+\hline
+Page \#   &Context                                                                                             &Suggestion                              &Reason              &Severity            \\
+\hline
+         1&Introduction \genbf{And} Definitions                                                                &and                                     &readability         &minor               \\\cline{2-5}
+          &and so is expression $42 \genbf{*} 2$                                                               &$\cdot$                                 &readability         &minor               \\\cline{2-5}
+          &non-negative numbers as \genbf{Peano} numbers                                                       &-                                       &no reference provided&average             \\\cline{2-5}
+\hline
+         2&\genbf{and we} use capitalized names for constructors                                               &We                                      &readability         &minor               \\\cline{2-5}
+          &starting on \genbf{data further from a base case}                                                   &data from a special case                &readability         &minor               \\\cline{2-5}
+          &for \genbf{an} SMT solver                                                                           &a                                       &grammar             &minor               \\\cline{2-5}
+          &We use \textit{many-sorted} first-order logic, that is, \genbf{logic} with                          &a logic                                 &grammar             &minor               \\\cline{2-5}
+\hline
+         3&$\func = \func_{ctr} \uplus \func_{sel} \uplus \genbf{true,false}$                                  &$\{true,false\}$                        &notation            &average             \\\cline{2-5}
+          &A type $\delta$ depends on another type \genbf{$\epsilon$ is $\epsilon$ is} the type of             &$\epsilon$ is                           &repetition          &minor               \\\cline{2-5}
+          &We also need \genbf{auxilitary} functions                                                           &auxiliary                               &typo                &minor               \\\cline{2-5}
+          &Distinctness: \dots \genbf{no two constructors} are equal                                           &no two constructors of the same type    &readability,enhancement&minor               \\\cline{2-5}
+          &$\genbf{\mathrm{d}_{i1}(x) \lor \dots \lor \mathrm{d}_{im_i}(x)}$                                   &$\mathrm{d}_{i1}(x) \lor \dots \lor \mathrm{d}_{im_i}(x) = true$&notation: not stated what the disjunction should be equal to&average             \\\cline{2-5}
+          &\genbf{We then define theory of datatypes and codatatypes $\dct$}                                   &We then define $\dct$ -- the theory \dots&readability         &minor               \\\cline{2-5}
+          &A formula is called \textit{DC-satisfiable} if there exists an interpretation \genbf{in that} satisfies it&-                                       &readability: something is missing&minor               \\\cline{2-5}
+          &An instance of degenerated codatatype \dots with \genbf{an} unique value                            &a                                       &grammar             &minor               \\\cline{2-5}
+\hline
+         4&Lemma 1. \dots a singleton \genbf{(cardinality equals 1)}                                           &with cardinality equal to 1             &readability         &average             \\\cline{2-5}
+          &In the latter case, $\delta$ necessarily \genbf{as} a single constructor                            &has                                     &typo                &critical            \\\cline{2-5}
+          &$C(1, C(0, C(0, \dots)))$, $C(0, C(1, C(0, \dots)))$ \genbf{etc}                                    &etc.                                    &grammar             &minor               \\\cline{2-5}
+          &The procedure \genbf{builts} \genbf{closure} of $E$ under given rules which are assigned a \genbf{phase; rules} belonging \dots&builds, a closure, phase. Rules         &grammar             &minor               \\\cline{2-5}
+          &where \genbf{conclusion} either specifies                                                           &the conclusion                          &grammar             &minor               \\\cline{2-5}
+          &or is $\bot$ (\genbf{contradiction})                                                                &a contradiction                         &grammar             &minor               \\\cline{2-5}
+          &and \genbf{children} of a node are \genbf{results} of rule application                              &the children, the results               &grammar             &minor               \\\cline{2-5}
+          &one by one \genbf{in spirit} of depth-first search                                                  &in a spirit                             &grammar             &minor               \\\cline{2-5}
+          &with leaf nodes \genbf{$\bot$ allowed}                                                              &-                                       &readability: need to rephrase ``contradiction allowed''&average             \\\cline{2-5}
+          &A \genbf{note} is saturated if no nonredundant rule \genbf{application} can be performed            &node, applications                      &grammar             &minor               \\\cline{2-5}
+          &a calculus of equality \genbf{sets} with applications as operations                                 &of sets                                 &grammar             &minor               \\\cline{2-5}
+          &$\mathrm{Refl}$, $\mathrm{Sym}$ and $\mathrm{Trans}$, \genbf{$\mathrm{Refl}$} are encoded properties&-                                       &repetition          &minor               \\\cline{2-5}
+          &whereas $\mathrm{Inject}$ computes $unification@the unification$ (downward) closure                 &                                        &grammar             &minor               \\\cline{2-5}
+\hline
+         5&We write $\mapping(x)$ to get a representative for \genbf{equivalence class} of $x$                 &an/the equivalence class                &grammar             &minor               \\\cline{2-5}
+          &$\mathrm{Clash}$ represents \genbf{failure} to unify                                                &a/the failure                           &grammar             &minor               \\\cline{2-5}
+          &Figure 1. The $\mathrm{Clash}$ rule: $\genbf{C}(t_1,\dots,t_n) \approx \genbf{\mathcal{D}}(u_1,\dots,u_n) \in E \quad \genbf{C} \neq \genbf{D}$&, ,                                     &notation: not unified display style for the same entities&minor               \\\cline{2-5}
+          &$C \in \genbf{\func{F}_{ctr}}$                                                                      &$\func{}_{ctr}$                         &typo                &minor               \\\cline{2-5}
+          &All datatypes therefore \dots and all codatatypes -- as \genbf{cyclic}                              &ones                                    &grammar             &minor               \\\cline{2-5}
+          &$\alpha$-disequivalent\genbf{---}e.g.                                                               &--                                      &typo                &minor               \\\cline{2-5}
+\hline
+         6&\genbf{Because of $\mu$-terms} \genbf{there is} no infinitely expanding \genbf{terms so} \genbf{number} of times&Because of $\mu$-terms what?, not stated where afterwards, terms\genbf{,}so, the number&readability,grammar, punctuation&minor               \\\cline{2-5}
+          &They capture \genbf{properties} of (co)datatypes described above                                    &the properties                          &grammar, punctuation&minor               \\\cline{2-5}
+          &\genbf{Informally first rule} of this phase \dots implements \genbf{search}                         &Informally\genbf{,} the first rule, searching&grammar             &minor               \\\cline{2-5}
+          &The second rule is needed to deal with \genbf{described} degenerate case                            &the described                           &grammar             &minor               \\\cline{2-5}
+          &with \genbf{root node}                                                                              &the root node                           &grammar: multiple occurences found throughout the paper&average             \\\cline{2-5}
+          &If $\mathrm{Split}$ is applied on some $t^\tau$, \genbf{by} the previous step                       &at                                      &grammar             &minor               \\\cline{2-5}
+\hline
+         7&Now we construct \genbf{family} of sets                                                             &a family                                &grammar             &minor               \\\cline{2-5}
+          &Consider $S_t^\infty$ \dots because all chains of selectors \genbf{in input}                        &its/the input                           &grammar             &minor               \\\cline{2-5}
+          &\genbf{Depth} of a tree branch is therefore                                                         &The depth                               &grammar             &minor               \\\cline{2-5}
+          &First we define \textit{\genbf{expansion}} \dots with \genbf{free variable} $x$ \genbf{is} substituted by \genbf{body} of $t$&the expansion, a free variable, unnecessary ``is'', the body&grammar             &minor               \\\cline{2-5}
+          &By definition of \genbf{$\mu$-terms after}                                                          &$\mu$-terms\genbf{,} after              &punctuation         &minor               \\\cline{2-5}
+\hline
+         8&\genbf{Now that we defined}                                                                         &Having defined/Now that we have defined &grammar,readability &minor               \\\cline{2-5}
+          &$\interp_\type(\tau)$ denotes \genbf{domain} of type $\tau$                                         &the domain                              &grammar             &minor               \\\cline{2-5}
+\hline
+         9&Points 2 and 3 can be proven by induction. \genbf{First one needs to prove that}                    &To prove/for proving the first one, we need to prove \dots&grammar,readability &average             \\\cline{2-5}
+\hline
+        10&$t_1 \genbf{\equiv} t_2 \in F$                                                                      &$\approx$                               &notation            &critical            \\\cline{2-5}
+          &induction hypothesis then \genbf{it's}                                                              &it is                                   &informal language   &average             \\\cline{2-5}
+          &We \genbf{can't} apply $\mathrm{Split}$                                                             &cannot                                  &informal language   &average             \\\cline{2-5}
+          &$C_{j'}\left( s_{j'}^1(u),\dots,s_{j'}^n(u) \right)$ \genbf{for unknown yet} $j'$                   &for yet unknown                         &grammar             &minor               \\\cline{2-5}
+\hline
+\end{longtabu}
