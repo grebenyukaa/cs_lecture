@@ -1,0 +1,95 @@
+\input{preamble-eng.tex}
+\begin{document}
+\maketitle
+
+
+In his project the author provides an implementation of the theory of codatatypes for a satisfiability modulo theory(SMT) solver. To achieve this, the author shows how to define the satifiability on the theory of codatatypes and proves that his definition is correct, using derivation trees.
+
+
+The reviewer was able to understand the whole project. The project has a clear structure and is split into several logically independednt sections. In each section the author gives an informal definition of the contents of the section at first, and then provides a clear formal definition, which helps the reader to understand the material better. The project sections are ordered in a way to gradually build up formalism to achieve the goal of proving the refutation and solition soundness of the author's theory of codatatypes in the final section and avoid unnecessary complex definitions in the preliminary ones.
+
+
+Some parts of the project were unclear, however. The comments and suggestions to improve these parts are listed below by page. The list of English grammar and puctuation errors, typos and word ordering problems is presented in the final section of the review, listed by page in a form of an errorneous combination of words in bold with a suggestion to improve it, a reason to consider it an error and a severity of this error to the reviewer's mind.
+
+
+\paragraph{Logic defects and errors}
+\begin{enumerate}
+	\item Page 1:
+	\begin{itemize}
+		\item The author does not give a general formal definition of ``type'' and rather resorts to a highly philosophical one, e.g. ``a meaning of expression''. It is advised to give a more formal definition of a type, or to not give any one at all.
+		\item The use of Haskell notation for the definitions of (co)datatypes is understandable, applicable and makes it clear for readers with a programming background. To the reviewer's mind it can be found confusing by other readers, so it is strongly advised to give a proper explaination to this notation, mostly for the ``SCons'' operation and the symbol ``$|$''.
+	\end{itemize} 
+
+	\item Page 2:
+	\begin{itemize}
+		\item A problem with the Haskell notation again: it would be better to explain the meaining of the ``\_'' symbol.
+		\item ``Recall that a logic is deﬁned through a signature that lists all non-logic symbols \dots'' -- not clear where to recall from. It is advised to add a refence to a source.
+		\item Definitions of sytactic equality, term equality and $\alpha$-equality on this page and the following ones are buried in a lot of text. It is hard for a reader to refer to these definition throughout the course of the paper. Consider highlighting those in some way. The same advise is given for the definition of the set of (co)datatypes.
+	\end{itemize}
+
+	\item Page 3:
+	\begin{itemize}
+		\item The brackets notation is inclear in the ``codata'' formal definition. Please, clarify the meaning of $\left[ \mathrm{s}^{1}_{11} : \right]$.
+		\item The mathematical notation is incorrect in $\func = \func_{ctr} \uplus \func_{sel} \uplus true,false$, the correct way is $\func = \func_{ctr} \uplus \func_{sel} \uplus \{true,false\}$.
+		\item \mathrm{d}_{i1}(x) \lor \dots \lor \mathrm{d}_{im_i}(x) -- it is not stated what this disjunction must equal to, which can be naturally guessed from the infornal explaination to be 1, however. Still, it had better be stated clearly in the formal definition.
+		\item The ``incduction property'' and the ``dual property'' definitions are buried in a lot of text, but are referenced in several proofs, and thus are considered higly important. Highlighting the properties in a similar to the ``shared basic properties'' way is advised, as the paper's clarity would benefit from it.
+		\item The formal defintiion for an ``interpretation'' of a formula is absent, but is referenced in the defintion of DC-satisfiability: ``formula is called DC-satisfiable, if there exists an interpretation \dots that satisfies it''.
+	\end{itemize}
+
+	\item Page 4:
+	\begin{itemize}
+		\item The lemma~1 definition and proof has several defects:
+		\begin{itemize}
+			\item ``Corecursive codatatypes'' -- by definition of ``codatatypes'' from p.~1 they are already corecursive and their corecursivity need not be mentioned again in the lemma.
+			\item In the proof of the lemma the author states that ``cross product of any domain to a singleton set is the same domain'', which is technically incorrect, as a cross product of a domain to a singleton set would produce another domain, consisting of pairs of elements: $A \times S = \{ (a, s) | a \in A and S = \{s\} \}$, but obviously will not affect the new domain's cardinality. This minor mathematical issue should be fixed, nonetheless.
+		\end{itemize}
+	\end{itemize}
+
+	\item Page 5:
+	\begin{itemize}
+		\item The operation ``$\le\le$'' is not defined formally by the author but is widely used in definitions of rules (e.g. Trans, Cong).
+		\item In the definition of the injection closure, the notation used in the conclusion of the rule is unclear, mainly ``$E+$''. Also it is unclear why the syntactic equality operator is used between a closure $E$ and a set of rules on the right side.
+		\item The termin ``free variable'' occurs first on this page is widely used by the author thereafter, but the paper lacks its formal definition.
+		\item Highlighting the $\alpha$-equality is strongly advised, as it is used in the key theorems in the paper.
+	\end{itemize}
+
+	\item Page 6:
+	\begin{itemize}
+		\item The paper lacks an informal explaination of the reasons why complex rules (e.g. Acyclic, Unique, Single and Split) are constructed the way they are defined formally. The paper's clarity would benefit from providing it.
+		\item In the formal definition of the Split rule, the right part of the subconjuction on the right side of the disjuncton, namely ``$\delta$ is finite'' is mathematically incorrect and should be written as ``$|\delta|$ is finite'' instead.
+		\item The renaming part of a rule conclusion ``$\mapping := \mapping\left[ \tilde{u} \rightarrow \mu \tilde{u}.\ C(\tilde{t_1},\dots,\tilde{t_n}) \right]$'' makes use of an undefined symbol ``$:=$''. It is advised to clarify the renaming notation and make it consistent with a previously given one for terms.
+		\item The figure numbering is incorrect across the whole paper. Figures are numbered subsequently, not depending on the secton number, but are referenced by a combined section and figure number. For example the sentence ``Rules for this phase are listed on figure 3.2'' refers to the figure with caption ``Figure 2: Derivation rules for acyclicity and uniqueness''.
+		\item ``Hence, $\mapping(t^\tau)$ \dots can take in models of $E$'' -- it is unclear what the ``model'' of $E$ is, as the paper lacks the definition of a model of a closure of rules.
+		\item The ``derivation trees'' had better be defined formally by the section~4, as they are widely used across the paper in the key theorems and are mentioned as ``closed'' on this page without defining what a closed derivation tree is in either formal or informal way.
+	\end{itemize}
+
+	\item Page 7:
+	\begin{itemize}
+		\item $S_t^\infty = \lim_{i \rightarrow \infty} S^i_t$ -- a formal definition or an informal one for a limit, defined on sets, is needed.
+		\item ``$S_t^\infty$ \dots is a finite set because all chains of selectors in input are finite'' -- this part of the proof of the theorem~1 needs clarification.
+		
+		\item The whole proof of the termination theorem (theorem~1) is given in a rather sketchy way, and thus is unclear to the reviewer. The induction process is not shown and is just informally described. If the calculations, needed to formally describe it are bulky, it should at least be explained to the reader, that they are left outside the scope of the paper due to their cumbersomness.
+		
+		\item The same problem holds for the proof of refutation soundness (theorem~2). Firstly, the statement ``If $\mathrm{Split}$ is applied on some $t^\tau$, by the previous step, then $E \cup \left\{ t \approx C_j\left( s_j^1(t),\dots,s_j^{n_j}(t) \right) \right\}$ is $\dct$-unsatisfiable for all $C_j \in \func^\tau_{ctr}$, and all possible models require this equality'' needs clarification. Secondly, the induction process should be described using a proper mathematical induction algorithm, clearly specifying the base and the step.
+
+		\item In the definition of the expansion rule, namely the ``$\expansion{x}^B_{t = \mu y.\ D(\bar{v})}$'' case, it is unclear what happens if $x \notin B$ and $x \ne y$ at the same time.
+	\end{itemize}
+
+	\item Page 8:
+	\begin{itemize}
+		\item The author provides a good and clear example of a not normal $\mu$-term. However, it is advised to provide some calculations, showing that $\mu y.\ C(y)$ and $\mu x.\ C(\mu y.\ C(y))$ are indeed $\alpha$-equvalent.
+
+		\item In the point~2 of the definiton of a ``normal interpretation'', namely ``\dots where $x$ is fresh'' the termin ``fresh'' is undefined. The same termin is used in the proof of solution soundness. It is asvised to provide a definition of a ``fresh'' term.
+	\end{itemize}
+
+	\item Page 9:
+	\begin{itemize}
+		\item An ``assignment'' notation is used here again, but is not defined.
+	\end{itemize}
+\end{enumerate}
+
+
+\paragraph{English errors, typos and readability issues}
+\input{review-eng-err.tex}
+
+\end{document}
