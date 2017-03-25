@@ -62,24 +62,25 @@ def parseLine(line):
 
 def toTex(byPage):
 	hline = "\\hline" + ROWSEP
-	cline = "\\cline{2-5}"
+	hdline = "\\hhline{|=|=|=|=|}" + ROWSEP
+	cline = "\\cline{2-4}"
 	multirow_fmt = "{page:10}"#"\\multirow{{{count}}}{{*}}{{{page}}}"
-	data_fmt = "&".join(["{page:10}", "{context:100}", "{suggestion:40}", "{reason:20}", "{severity:20}"]) + '\\\\{ate}' + ROWSEP
+	data_fmt = "&".join(["{page:10}", "{context:100}", "{suggestion:40}", "{reason:20}"]) + '\\\\{ate}' + ROWSEP
 
 	out_str = ''
 	out_str += hline
-	out_str += data_fmt.format(page="Page \\#", context="Context", suggestion="Suggestion", reason="Reason", severity="Severity", ate="")
+	out_str += data_fmt.format(page="P.", context="Context", suggestion="Suggestion", reason="Reason", ate="")
 	
 	for page, vdata in byPage.items():
 		mr_page = multirow_fmt.format(count=len(vdata), page=page)
-		data_str = hline
+		data_str = hdline
 		for i, data in enumerate(vdata):
 			ctx, rep, rsn, sev = data
 			ctx_str = ''.join(map(lambda k: k if k not in rep else "\\{0}{{{1}}}".format(TEX_BOLD_CMD, k), ctx))
-			sug_str = ', '.join(rep.values())
-			data_str += data_fmt.format(page = mr_page if i == 0 else "", context = ctx_str, suggestion = sug_str, reason = rsn, severity = sev, ate = cline)
+			sug_str = '; '.join(rep.values())
+			data_str += data_fmt.format(page = mr_page if i == 0 else "", context = ctx_str, suggestion = sug_str, reason = rsn, ate = cline)
 		out_str += data_str
-	out_str += hline
+	out_str += hdline
 	return out_str
 
 def toTexTable(contents, align_string):
@@ -94,11 +95,11 @@ def main():
 
 	byPage = {}
 	with open(fInput, 'r') as f:
-		for line in f:
+		for iLine, line in enumerate(f):
 			if (len(line[:-1]) == 0):
 				continue
 
-			#print(line)
+			#eprint(iLine)
 			#print(parseLine(line[:-1]))
 			page, data = parseLine(line[:-1])
 			if (page not in byPage):
@@ -106,7 +107,7 @@ def main():
 			byPage[page] += [data]
 
 	contents = toTex(byPage)
-	res = toTexTable(contents, "|r|p{40mm}|X|X|c|")
+	res = toTexTable(contents, "|r|X[6,l]|X[3,l]|X[2,l]|")
 	print(res)
 
 

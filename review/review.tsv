@@ -1,22 +1,20 @@
 1	Introduction !And@and! Definitions	readability	m
-1	and so is expression $42 !*@$\cdot$! 2$	readability	m
-1	non-negative numbers as !Peano@-! numbers	no reference provided	a
+1	and so is expression $42 !*@use TeX cdot! 2$	readability	m
 
 2	!and we@We! use capitalized names for constructors	readability	m
 2	starting on !data further from a base case@data from a special case!	readability	m
 2	for !an@a! SMT solver	grammar	m
 2	We use \textit{many-sorted} first-order logic, that is, !logic@a logic! with	grammar	m
 
-3	$\func = \func_{ctr} \uplus \func_{sel} \uplus !true,false@$\{true,false\}$!$	notation	a
 3	A type $\delta$ depends on another type !$\epsilon$ is $\epsilon$ is@$\epsilon$ is! the type of	repetition	m
 3	We also need !auxilitary@auxiliary! functions	typo	m
-3	Distinctness: \dots !no two constructors@no two constructors of the same type! are equal	readability,enhancement	m
-3	$!\mathrm{d}_{i1}(x) \lor \dots \lor \mathrm{d}_{im_i}(x)@$\mathrm{d}_{i1}(x) \lor \dots \lor \mathrm{d}_{im_i}(x) = true$!$	notation: not stated what the disjunction should be equal to	a
+3	Distinctness:~\dots~!no two constructors@no two constructors of the same type! are equal	readability	m
 3	!We then define theory of datatypes and codatatypes $\dct$@We then define $\dct$ -- the theory \dots!	readability	m
-3	A formula is called \textit{DC-satisfiable} if there exists an interpretation !in that@-! satisfies it	readability: something is missing	m
-3	An instance of degenerated codatatype \dots with !an@a! unique value	grammar	m
+3	It defines a class of !$\Sigma$-interpretations~~which@possibly the symbol for this class is missing!	notation	m
+3	A formula is called \textit{DC-satisfiable} if there exists an interpretation !in that@something is missing! satisfies it	readability	m
+3	An instance of degenerated codatatype~\dots~with !an@a! unique value	grammar	m
 
-4	Lemma 1. \dots a singleton !(cardinality equals 1)@with cardinality equal to 1!	readability	a
+4	Lemma 1.~\dots~a singleton !(cardinality equals 1)@with cardinality equal to 1!	readability	a
 4	In the latter case, $\delta$ necessarily !as@has! a single constructor	typo	c
 4	$C(1, C(0, C(0, \dots)))$, $C(0, C(1, C(0, \dots)))$ !etc@etc.!	grammar	m
 4	The procedure !builts@builds! !closure@a closure! of $E$ under given rules which are assigned a !phase; rules@phase. Rules! belonging \dots	grammar	m
@@ -24,38 +22,52 @@
 4	or is $\bot$ (!contradiction@a contradiction!)	grammar	m
 4	and !children@the children! of a node are !results@the results! of rule application	grammar	m
 4	one by one !in spirit@in a spirit! of depth-first search	grammar	m
-4	with leaf nodes !$\bot$ allowed@-!	readability: need to rephrase ``contradiction allowed''	a
+4	with leaf nodes !$\bot$ allowed@need to rephrase ``contradiction allowed''!	readability	a
 4	A !note@node! is saturated if no nonredundant rule !application@applications! can be performed	grammar	m
 4	a calculus of equality !sets@of sets! with applications as operations	grammar	m
-4	$\mathrm{Refl}$, $\mathrm{Sym}$ and $\mathrm{Trans}$, !$\mathrm{Refl}$@-! are encoded properties	repetition	m
-4	whereas $\mathrm{Inject}$ computes $unification@the unification$ (downward) closure	grammar	m
+4	$\mathrm{Refl}$, $\mathrm{Sym}$ and $\mathrm{Trans}$, !Refl@-! are encoded properties	repetition	m
+4	whereas $\mathrm{Inject}$ computes !unification@the unification! (downward) closure	grammar	m
 
 5	We write $\mapping(x)$ to get a representative for !equivalence class@an/the equivalence class! of $x$	grammar	m
 5	$\mathrm{Clash}$ represents !failure@a/the failure! to unify	grammar	m
-5	Figure 1. The $\mathrm{Clash}$ rule: $!C@!(t_1,\dots,t_n) \approx !\mathcal{D}@!(u_1,\dots,u_n) \in E \quad !C@! \neq !D@!$	notation: not unified display style for the same entities	m
-5	$C \in !\func{F}_{ctr}@$\func{}_{ctr}$!$	typo	m
-5	All datatypes therefore \dots and all codatatypes -- as !cyclic@ones!	grammar	m
-5	$\alpha$-disequivalent!---@--!e.g.	typo	m
+5	Figure 1. The $\mathrm{Clash}$ rule: $!C@-!(t_1,\dots,t_n) \approx !\mathcal{D}@-!(u_1,\dots,u_n) \in E \quad !C@-! \neq !D@not unified display style for the same entities!$	notation	m
+5	$C \in~$!$\func{}$$F_{ctr}$@$\func{}_{ctr}$!	typo	m
+5	All datatypes therefore~\dots~and all codatatypes -- as !cyclic@ones!	grammar	m
+5	$\alpha$-disequivalent!---@too long dash!e.g.	typo	m
 
-6	!Because of $\mu$-terms@Because of $\mu$-terms what?! !there is@not stated where afterwards! no infinitely expanding !terms so@terms\genbf{,}so! !number@the number! of times	readability,grammar, punctuation	m
-6	They capture !properties@the properties! of (co)datatypes described above	grammar, punctuation	m
-6	!Informally first rule@Informally\genbf{,} the first rule! of this phase \dots implements !search@searching!	grammar	m
+6	Hence, $\mapping(t^\tau)$~\dots~can take in models of !$E$. by@$E$ by! !appling@applying!	grammar, punctuation	m
+6	!Because of $\mu$-terms@Because of $\mu$-terms what?!, !there is@\newline not stated where afterwards! no infinitely expanding !terms so@\newline terms\genbf{,}~so! !number@\newline the number! of times	readability, grammar, punctuation	m
+6	They capture !properties@the properties! of (co)datatypes described above	grammar	m
+6	!Informally first rule@Informally\genbf{,} the first rule! of this phase~\dots~implements !search@searching!	grammar	m
 6	The second rule is needed to deal with !described@the described! degenerate case	grammar	m
-6	with !root node@the root node!	grammar: multiple occurences found throughout the paper	a
+6	with !root node@the root node (multiple occurences found throughout the paper)!	grammar	a
 6	If $\mathrm{Split}$ is applied on some $t^\tau$, !by@at! the previous step	grammar	m
 
 7	Now we construct !family@a family! of sets	grammar	m
-7	Consider $S_t^\infty$ \dots because all chains of selectors !in input@its/the input!	grammar	m
+7	Consider $S_t^\infty$~\dots~because all chains of selectors !in input@its/the input!	grammar	m
 7	!Depth@The depth! of a tree branch is therefore	grammar	m
-7	First we define \textit{!expansion@the expansion!} \dots with !free variable@a free variable! $x$ !is@unnecessary ``is''! substituted by !body@the body! of $t$	grammar	m
+7	First we define \textit{!expansion@the expansion!}~\dots~with !free variable@\newline a free variable! $x$ !is@\newline unnecessary ``is''! substituted by !body@\newline the body! of $t$	grammar	m
 7	By definition of !$\mu$-terms after@$\mu$-terms\genbf{,} after!	punctuation	m
 
-8	!Now that we defined@Having defined/Now that we have defined!	grammar,readability	m
+8	Finally a normal form~\dots~recursively normalizing !the other@other! subterms	grammar	m
+8	!Now that we defined@Having defined/\newline Now that we have defined!	grammar, readability	m
 8	$\interp_\type(\tau)$ denotes !domain@the domain! of type $\tau$	grammar	m
+8	terms that are not !equalized@equal/unified!	readability	m
+8	We will base the process on !mapping@the mapping! $\mapping$ from section	grammar	m
 
-9	Points 2 and 3 can be proven by induction. !First one needs to prove that@To prove/for proving the first one, we need to prove \dots!	grammar,readability	a
+9	The set is constructed~\dots~by exhaustively !appling@applying!	typo	m
+9	!First@The first! point can be proven	grammar	m
+9	Points 2 and 3 can be proven by induction. !First one needs to prove that@To prove/for proving the first one, we need to prove \dots!	grammar, readability	a
+9	!Next one@Next\genbf{,} one! needs to prove	grammar	m
 
-10	$t_1 !\equiv@$\approx$! t_2 \in F$	notation	c
-10	induction hypothesis then !it's@it is!	informal language	a
+10	Then because $\mapping$ is an equivalence class !that implies@The whole sentence needs to be rephrased to mitigate the ambiguity of its interpretation. E.g.: ``Then, taking into account, that $\mapping$ is an equivalence class, all qualities \dots''! all equalities~\dots~are satisfied	readability	m
+10	by induction hypothesis !then@an unnecessary word! it's	readability	a
+10	by induction hypothesis then !it's@it is!	informal language	a
+10	!We use the fact that because@As a saturated node is considered, \dots! we consider a saturated node	readability	m
+10	If we let $u_i'$ be !$i$th@the $i$th! argument	grammar	m
 10	We !can't@cannot! apply $\mathrm{Split}$	informal language	a
+10	If $j \neq j'$ !we use that@not unnecessary words! $\mathrm{Cong}$ is exhausted	readability	m
+10	$\mathrm{Cong}$ is !exhausted so@exhausted\genbf{,} so! for any	punctuation	m
 10	$C_{j'}\left( s_{j'}^1(u),\dots,s_{j'}^n(u) \right)$ !for unknown yet@for yet unknown! $j'$	grammar	m
+10	$\mathrm{Conflict}$ does not !apply so@apply\genbf{,} so! \dots	punctuation	m
+10	Because $\interp_\func(t) =_\alpha \mapping^*(t)$~\dots~and they are not equal by !lemma 4(3) we@lemma 4(3)\genbf{,} we! have	punctuation	m

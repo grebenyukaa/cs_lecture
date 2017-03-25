@@ -1,4 +1,4 @@
-\documentclass[a4paper]{report}
+\documentclass[a4paper]{article}
 
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -12,39 +12,16 @@
 \usepackage[backend=biber]{biblatex}
 \usepackage{url}
 
-\usepackage{unicode-math} % for changing math font and unicode symbols
-\setmathfont{XITS Math}
+%\usepackage{unicode-math} % for changing math font and unicode symbols
+%\setmathfont{XITS Math}
 
-\newcommand{\type}{\mathscr{Y}}
-\newcommand{\func}{\mathscr{F}}
-\newcommand{\keyword}[1]{\text{\textbf{#1}}\ }
-\newcommand{\neweq}{\\[10pt]}
-\newcommand{\terms}{\mathscr{T}}
-\newcommand{\expansion}[1]{\left\langle #1 \right\rangle}
-\newcommand{\normalized}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\interp}{\mathcal{J}}
-\newcommand{\mapping}{\mathcal{A}}
-\newcommand{\dct}{\mathcal{DC}}
-\newcommand{\lref}[2]{\ref{#1}(\ref{#2})}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{longtable}
 
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
-
-%algorithmic
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{framed}
-
-\makeatletter
-% because fuck algorithm env, that's why
-\makeatother
-
-% from algpseudocode.sty
-%\algdef{SE}[WHILE]{While}{EndWhile}[1]{\algorithmicwhile\ #1\ \algorithmicdo}{\algorithmicendwhile}%
-%\algdef{SE}[FOR]{For}{EndFor}[1]{\algorithmicfor\ #1\ \algorithmicdo}{\algorithmicendfor}%
-%\algdef{SE}[LOOP]{Loop}{EndLoop}{\algorithmicloop}{\algorithmicendloop}%
-%\algdef{SE}[IF]{If}{EndIf}[1]{\algorithmicif\ #1\ \algorithmicthen}{\algorithmicendif}%
 
 \date{\today}
 \title{A review on ``A Decision Procedure for (Co)datatypes in SMT Solvers'' by Nikolay Amiantov}

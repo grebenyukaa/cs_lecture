@@ -103,7 +103,7 @@ p | text
 4 | corecursive codatatype
 4 | (because cross product of any domain to a singleton set is the same domain).  -- it's not the same domain technically, but the part about cardinality is true
 5 | define the << operation properly
-5 | injection closure: E+? and why i1s syntactic equality used?
+5 | injection closure: E+? and why is syntactic equality used?
 5 | define properly the "free variable" termin
 6 | δ ∈ Ydt A([tδ]) = µx. u x ∈ FV(u) ⊥ -- explain that we look at u as a part of the same \mu notation term in x ∈ FV(u)
 6 | δ ∈ Ydt ∧ δ is ﬁnite -- |\delta|, not just \delta
@@ -120,5 +120,7 @@ p | text
 7 | theorem 1 -- without formal definitions for derivation trees, limits of set unions and a througly expalinred proof, nothing can be made out of the proof
     if smth can be inferred inductively, then please show the indution process
 7 | If Split is applied on some tτ, by the previous step, then E∪{t ≈ Cj(s1 j(t),...,snj j (t))}is DC-unsatisﬁable for all Cj ∈ Fτctr, and all possible models require this equality – hence E is DC-unsatisﬁable. -- needs clarification
+7 | first rule for expansion: what if x !\in B and x != y ?
 8 | For example, t = µx. C(µy. C(y)) is not normal because ⟨y⟩µy. C(y) = µy. C(y), and so is ⟨µy. C(y)⟩µx. C(µy. C(y)) – they are α-equivalent. -- nice example, but please show the actual calculations
-
+8 | Def 1 (Normal interprettaion) -- fresh?
+9 | the bottom part of the rule has unclear notation
